@@ -1,28 +1,32 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react'
 
+import { connect } from 'react-redux'
+import { Button } from 'antd'
+
+import { addGunAsync, addGun } from '@/redux/modules/test.redux'
+
+@connect((state) => ({ num: state }), { addGun, addGunAsync })
 class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
-  }
+	constructor(props) {
+		super(props)
+		this.state = {}
+	}
+	render() {
+		console.log(this.props)
+		const addGun = this.props.addGun
+		const addGunAsync = this.props.addGunAsync
+		return (
+			<div className="App">
+				<span>{this.props.num.Test}</span>
+				<Button type="primary" onClick={() => addGunAsync()}>
+					Button
+				</Button>
+				<Button type="primary" onClick={() => addGun()}>
+					Button
+				</Button>
+			</div>
+		)
+	}
 }
 
-export default App;
+export default App
